@@ -2,10 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ toDo  }) { 
+
   return (
     <>
       <Head>
@@ -14,6 +16,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {toDo?.length === 0 ? (<div>Loading...</div>) : 
+        (
+          toDo?.map((toDo => (
+            <div key={toDo.id}>
+              <p>
+                {toDo.id} : {toDo.title}
+              </p>
+            </div>
+          )))
+        )}
+
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
